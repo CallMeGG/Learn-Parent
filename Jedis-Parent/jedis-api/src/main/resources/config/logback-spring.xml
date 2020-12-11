@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+    <property name="APP_NAME" value="lxfzxt"/>
+    <property name="applicationName" value="lxfzxt"/>
+
+    <springProperty scope="context" name="LOG_HOME" source="log.home" defaultValue="logs"/>
+
+    <conversionRule conversionWord="clr" converterClass="org.springframework.boot.logging.logback.ColorConverter"/>
+    <conversionRule conversionWord="wex"
+                    converterClass="org.springframework.boot.logging.logback.WhitespaceThrowableProxyConverter"/>
+    <conversionRule conversionWord="wEx"
+                    converterClass="org.springframework.boot.logging.logback.ExtendedWhitespaceThrowableProxyConverter"/>
+    <!--
+        %clr:由ColorConverter 进行处理
+        %d{yyyy-MM-dd HH:mm:ss.SSS}: 输出时间
+        ${LOG_LEVEL_PATTERN:-%5p}: 日志级别，并且使用5个字符靠左对齐
+        ${PID:- }:线程id
+        %15.15t: t-线程 %15.15 如果线程名小于15个字符,则在左边填充空格.如果大于15个字符，则进行截断
+        %-40.40logger{39}: 日志输出者的名字,-40.40 : 如果线程名小于40个字符,则在右边填充空格.如果大于40个字符，则进行截断
+        %m:日志
+        %n:换行符
+        {LOG_EXCEPTION_CONVERSION_WORD:-%wEx}: 由ExtendedWhitespaceThrowableProxyConverter 进行处理, 该类是在异常堆栈的打印过程中添加一些空格, 其实就是在堆栈的日志前后加上换行符
+     -->
+    <property name="CONSOLE_LOG_PATTERN"
+              value="${CONSOLE_LOG_PATTERN:-%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} %clr(---){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}}"/>
+    <property name="FILE_LOG_PATTERN"
+              value="${FILE_LOG_PATTERN:-%d{yyyy-MM-dd HH:mm:ss.SSS} ${LOG_LEVEL_PATTERN:-%5p} ${PID:- } --- [%t] %-40.40logger{39} : %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}}"/>
+
+
+    <!-- 控制台输出日志 -->
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <pattern>${CONSOLE_LOG_PATTERN}</pattern>
+        </layout>
+    </appender>
+
+    <!-- 系统日志 -->
+    <appender name="FILE_SYSTEM"
+              class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_HOME}/${APP_NAME}_system.log</file>
+        <encoder>
+            <pattern>${FILE_LOG_PATTERN}</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>
+                ${LOG_HOME}/${APP_NAME}_system.%d{yyyy-MM-dd}.log
+            </fileNamePattern>
+            <maxHistory>15</maxHistory>
+            <totalSizeCap>3GB</totalSizeCap>
+        </rollingPolicy>
+    </appender>
+
+    <!-- 定时任务 -->
+    <appender name="FILE_Connect"
+              class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_HOME}/${APP_NAME}_connect.log</file>
+        <encoder>
+            <pattern>${FILE_LOG_PATTERN}</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>
+                ${LOG_HOME}/${APP_NAME}_connect.%d{yyyy-MM-dd}.log
+            </fileNamePattern>
+            <maxHistory>15</maxHistory>
+            <totalSizeCap>3GB</totalSizeCap>
+        </rollingPolicy>
+    </appender>
+
+    <!-- 异常日志   -->
+    <appender name="FILE_EXCEPTION"
+              class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_HOME}/${APP_NAME}_exception.log</file>
+        <encoder>
+            <pattern>${FILE_LOG_PATTERN}</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>
+                ${LOG_HOME}/${APP_NAME}_exception.%d{yyyy-MM-dd}.log
+            </fileNamePattern>
+            <maxHistory>15</maxHistory>
+            <totalSizeCap>3GB</totalSizeCap>
+        </rollingPolicy>
+    </appender>
+
+    <!-- 开发环境 -->
+    <springProfile name="dev">
+        <logger name="com.thunisoft.hyyd" level="INFO" additivity="false">
+            <appender-ref ref="STDOUT"/>
+        </logger>
+        <logger name="connectLog" level="DEBUG" additivity="true">
+            <appender-ref ref="STDOUT"/>
+        </logger>
+        <logger name="exceptionLog" level="DEBUG" additivity="true">
+            <appender-ref ref="STDOUT"/>
+        </logger>
+        <root level="INFO">
+            <appender-ref ref="STDOUT"/>
+        </root>
+    </springProfile>
+
+
+    <!-- 测试环境 -->
+    <springProfile name="test">
+        <logger name="com.thunisoft.hyyd" level="INFO" additivity="true">
+            <appender-ref ref="FILE_SYSTEM"/>
+        </logger>
+        <logger name="connectLog" level="DEBUG" additivity="true">
+            <appender-ref ref="FILE_Connect"/>
+        </logger>
+        <logger name="exceptionLog" level="DEBUG" additivity="true">
+            <appender-ref ref="FILE_EXCEPTION"/>
+        </logger>
+        <root level="INFO">
+            <appender-ref ref="STDOUT"/>
+        </root>
+    </springProfile>
+
+
+    <!-- 生产环境 -->
+    <springProfile name="prod">
+        <logger name="com.thunisoft.hyyd" level="DEBUG" additivity="true">
+            <appender-ref ref="FILE_SYSTEM"/>
+        </logger>
+        <logger name="taskLog" level="DEBUG" additivity="true">
+            <appender-ref ref="FILE_Connect"/>
+        </logger>
+        <logger name="exceptionLog" level="INFO" additivity="true">
+            <appender-ref ref="FILE_EXCEPTION"/>
+        </logger>
+        <root level="INFO">
+            <appender-ref ref="STDOUT"/>
+        </root>
+    </springProfile>
+</configuration>

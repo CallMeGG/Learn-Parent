@@ -1,0 +1,10 @@
+swagger:
+  enabled: true
+application:
+  name: feignService
+server:
+  port: 8080
+gyp:
+  server:
+    feign:
+        url: http://127.0.0.1:8080
