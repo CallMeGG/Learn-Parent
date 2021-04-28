@@ -18,24 +18,13 @@ import org.springframework.stereotype.Component;
 @Component
 public class SystemConfig {
 
-    @Value("${redis.port}")
+    @Value("${spring.redis.port}")
     private int redisPort;
 
-    @Value("${redis.ip}")
+    @Value("${spring.redis.host}")
     private String redisIp;
 
-    @Value("${redis.password}")
+    @Value("${spring.redis.password}")
     private String redisPassword;
 
-    @Value("${redis.maxTotal}")
-    private int redisMaxTotal;
-
-    @Value("${redis.maxIdle}")
-    private int redisMaxIdle;
-
-    @Value("${redis.maxWaitMillis}")
-    private long redisMaxWaitMillis;
-
-    @Value("${redis.testOnBorrow}")
-    private boolean redisTestOnBorrow;
 }

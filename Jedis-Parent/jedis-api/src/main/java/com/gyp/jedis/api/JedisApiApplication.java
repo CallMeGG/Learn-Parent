@@ -17,6 +17,7 @@ public class JedisApiApplication {
 
     public static void main(String[] args) {
 
+
         ArrayList<Object> objects = new ArrayList<>();
 
         List<Object> list = Collections.unmodifiableList(objects);

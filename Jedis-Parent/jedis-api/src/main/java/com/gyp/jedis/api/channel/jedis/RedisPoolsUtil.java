@@ -78,10 +78,6 @@ public class RedisPoolsUtil {
             String password = systemConfig.getRedisPassword();
 
             JedisPoolConfig jedisPoolConfig = new JedisPoolConfig();
-            jedisPoolConfig.setMaxTotal(systemConfig.getRedisMaxTotal());
-            jedisPoolConfig.setMaxIdle(systemConfig.getRedisMaxIdle());
-            jedisPoolConfig.setMaxWaitMillis(systemConfig.getRedisMaxWaitMillis());
-            jedisPoolConfig.setTestOnBorrow(systemConfig.isRedisTestOnBorrow());
 
             if (StringUtils.isEmpty(password)) {
                 pool = new JedisPool(jedisPoolConfig, ip, port, 100000);

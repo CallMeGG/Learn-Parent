@@ -3,10 +3,12 @@ package com.gyp.jedis.api.controller;
 import com.alibaba.fastjson.JSON;
 import com.gyp.jedis.ResultCreator;
 import com.gyp.jedis.api.channel.jedis.RedisPoolsUtil;
+import com.gyp.jedis.api.channel.springredis.SpringRedis;
 import com.gyp.jedis.model.dto.ResultDto;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,6 +34,9 @@ public class RedisPoolController {
     private int index = 0;
     private static int staticIndex = 0;
 
+    @Autowired
+    private SpringRedis springRedis;
+
     @GetMapping("/1/")
     public String get() {
 
@@ -48,10 +53,11 @@ public class RedisPoolController {
     )
     public ResultDto put(String str) {
 
-        RedisPoolsUtil.getSingleton().set("00000001", "123");
-        System.out.println(RedisPoolsUtil.getSingleton().get("00000001"));
-        RedisPoolsUtil.getSingleton().set("00000001", "321");
-        System.out.println(RedisPoolsUtil.getSingleton().get("00000001"));
+        springRedis.test();
+        // RedisPoolsUtil.getSingleton().set("00000001", "123");
+        // System.out.println(RedisPoolsUtil.getSingleton().get("00000001"));
+        // RedisPoolsUtil.getSingleton().set("00000001", "321");
+        // System.out.println(RedisPoolsUtil.getSingleton().get("00000001"));
         return ResultCreator.success();
     }
 
