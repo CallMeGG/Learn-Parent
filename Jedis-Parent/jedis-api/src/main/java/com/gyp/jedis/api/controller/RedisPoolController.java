@@ -17,7 +17,7 @@ import java.util.List;
 /**
  * Title: RedisPoolController
  * date 2019/11/29 13:38
- * Company: 北京华宇元典信息服务有限公司
+ * Company: GYP
  *
  * @author GYP
  * @version 1.0

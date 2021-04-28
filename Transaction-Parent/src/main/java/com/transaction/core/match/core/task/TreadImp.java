@@ -5,7 +5,7 @@ import com.transaction.core.match.core.CoreTransaction;
 /**
  * Title: demo
  * Description: 这个没用了
- * Company: 北京华宇元典信息服务有限公司
+ * Company: GYP
  *
  * @author GYP
  * @version 1.0

@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 /**
  * Title: SystemConfig
  * date 2019/11/28 13:36
- * Company: 北京华宇元典信息服务有限公司
+ * Company: GYP
  *
  * @author GYP
  * @version 1.0

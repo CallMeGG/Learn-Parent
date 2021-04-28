@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
  * Title: FeignClientController
  * Description: 接口的真正实现部分
  * date 2019/12/9 10:27
- * Company: 北京华宇元典信息服务有限公司
+ * Company: GYP
  *
  * @author GYP
  * @version 1.0

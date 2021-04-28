@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 /**
  * Title: TheFirstFeignInteface
  * date 2019/12/6 17:14
- * Company: 北京华宇元典信息服务有限公司
+ * Company: GYP
  *
  * @author GYP
  * @version 1.0

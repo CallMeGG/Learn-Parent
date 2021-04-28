@@ -16,7 +16,7 @@ import java.util.concurrent.ConcurrentHashMap;
 /**
  * Title: Transaction
  * Description:
- * Company: 北京华宇元典信息服务有限公司
+ * Company: GYP
  *
  * @author GYP
  * @version 1.0
@@ -111,8 +111,8 @@ public class CoreTransaction {
                                         .setOrderNo(new Date().getTime() + "")
                                         .setCount(dealCount)
                                         .setTatolPrice(seller.getPrice().multiply(new BigDecimal(dealCount)));
-                                transcationService.addOrder(orderBuy);
-                                transcationService.addOrder(orderSell);
+                               // transcationService.addOrder(orderBuy);
+                               // transcationService.addOrder(orderSell);
 
                                 if (seller.getCount() == 0) {
                                     iteratorSell.remove();

@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * Title: TheFirstImpController
  * date 2019/12/10 11:15
- * Company: 北京华宇元典信息服务有限公司
+ * Company: GYP
  *
  * @author GYP
  * @version 1.0

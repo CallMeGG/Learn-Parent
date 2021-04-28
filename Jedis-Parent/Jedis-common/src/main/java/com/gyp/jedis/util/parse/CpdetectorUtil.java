@@ -9,7 +9,7 @@ import java.nio.charset.Charset;
 /**
  * Title: CpdetectorUtil
  * Description: 检测文件的编码和文本流的编码
- * Company: 北京华宇元典信息服务有限公司
+ * Company: GYP
  *
  * @author GYP
  * @version 1.0
