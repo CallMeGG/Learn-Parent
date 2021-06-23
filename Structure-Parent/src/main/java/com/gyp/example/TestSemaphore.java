@@ -5,7 +5,6 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * Title: TestSemaphore
- * Description: TODO
  * date 2021/6/1 14:33
  *
  * @author GYP
